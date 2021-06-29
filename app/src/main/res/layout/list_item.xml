@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="newsList"
+            type="com.example.popularnews.data.entity.Article" />
+    </data>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="10dp"
+            android:clickable="true"
+            android:focusable="true"
+            app:cardCornerRadius="5dp"
+            app:cardElevation="5dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/st_guideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_begin="10dp"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/en_guideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintGuide_end="20dp" />
+
+
+                <ImageView
+                    android:id="@+id/news_image"
+                    android:layout_width="0dp"
+                    android:layout_height="190dp"
+                    android:contentDescription="@null"
+                    android:scaleType="centerCrop"
+                    app:imageUrl="@{newsList.urlToImage}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+                <LinearLayout
+                    android:id="@+id/linear_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="28dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:background="@drawable/calendar_shape"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toBottomOf="@+id/news_image"
+                    app:layout_constraintEnd_toEndOf="@+id/news_image">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="11dp"
+                        android:background="@drawable/calendar" />
+
+                    <TextView
+                        android:id="@+id/tv_pub_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:fontFamily="@font/roboto"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        app:showDate="@{newsList.publishedAt.toString()}" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/author"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="14dp"
+                    android:fontFamily="@font/roboto"
+                    android:maxWidth="170dp"
+                    android:text="@{newsList.author}"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/news_image"
+                    app:layout_constraintStart_toStartOf="@+id/st_guideline"
+                    tools:text="Lauren Fox, Ted Barrett,..." />
+
+                <TextView
+                    android:id="@+id/tv_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:fontFamily="@font/roboto"
+                    android:text="@{newsList.title}"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@+id/en_guideline"
+                    app:layout_constraintStart_toStartOf="@+id/st_guideline"
+                    app:layout_constraintTop_toBottomOf="@+id/news_image"
+                    tools:text="Как принято считать, тщательные
+            исследования конкурентов обнародованы." />
+
+                <TextView
+                    android:id="@+id/tv_maintext"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="@font/roboto"
+                    android:text="@{newsList.description}"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@+id/en_guideline"
+                    app:layout_constraintStart_toStartOf="@+id/st_guideline"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_title"
+                    tools:text="Реплицированные с зарубежных источников,
+            современные исследования призывают нас к новым свершениям,
+            которые, в свою очередь, должны быть обнародованы." />
+
+                <TextView
+                    android:id="@+id/tv_CNN"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="5dp"
+                    android:fontFamily="@font/roboto"
+                    android:text="@{newsList.source.name}"
+                    android:textColor="@color/black"
+                    app:layout_constraintEnd_toStartOf="@+id/tv_time"
+                    app:layout_constraintStart_toEndOf="@+id/tv_time"
+                    app:layout_constraintStart_toStartOf="@+id/st_guideline"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_maintext" />
+
+                <TextView
+                    android:id="@+id/tv_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="15dp"
+                    android:fontFamily="@font/roboto"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/tv_CNN"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_maintext"
+                    tools:text="• 9 hours ago" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+</layout>
