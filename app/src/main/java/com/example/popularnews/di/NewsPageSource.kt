@@ -4,7 +4,6 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.popularnews.data.api.NewsApiService
 import com.example.popularnews.data.entity.Article
-import com.example.popularnews.data.toArticle
 import retrofit2.HttpException
 
 class NewsPageSource(
@@ -25,13 +24,13 @@ class NewsPageSource(
         val pageSize: Int = params.loadSize
 
         val response = api.getNews(query, page, pageSize)
-        if (response.isSuccessful) {
-            val articles = checkNotNull(response.body()).articles.map { it.toArticle() }
+        return if (response.isSuccessful) {
+            val articles = checkNotNull(response.body()).articles
             val nextKey = if (articles.size < pageSize) null else page + 1
             val prevKey = if (page == 1) null else page - 1
-            return LoadResult.Page(articles, prevKey, nextKey)
+            LoadResult.Page(articles, prevKey, nextKey)
         } else {
-            return LoadResult.Error(HttpException(response))
+            LoadResult.Error(HttpException(response))
         }
     }
 }
